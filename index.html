@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{if '{current_time format="%Y%m%d"}' >= '20261128'}cm{if:else}bf{/if}">
+
+<head>
+
+  <!-- Shared head: charset, viewport, analytics, icons, fonts, stylesheet.
+       Template path is SummerBall/.head. Must stay first inside the head. -->
+  {embed="SummerBall/.head"}
+
+  <!-- Page specific below this line only. -->
+
+  <title>Summer Ball 2027 | Reading Students' Union</title>
+  <meta name="description" content="Summer Ball 2027 is the official end of year celebration from Reading Students' Union.">
+
+  <!-- TODO: Summer Ball 2027 logo asset -->
+  <link rel="preload" as="image" href="">
+
+</head>
+
+<body>
+
+  <main class="sb-page home-page">
+
+    <!-- ===================== PAGE CHROME ===================== -->
+    <!-- Sits above the hero. The nav is transparent so the hero media
+         reads through behind it. Do not give the nav a background. -->
+
+    <div class="sb-page-chrome">
+      {embed="SummerBall/.nav"}
+    </div>
+
+    <!-- ===================== HERO ===================== -->
+
+    <section class="home-hero" aria-label="Summer Ball homepage">
+
+      <div class="home-hero__media" aria-hidden="true">
+        <video
+          class="home-hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="https://pub-3abfc09198b8466fb37434889526af01.r2.dev/hero_.mp4"
+            type="video/mp4"
+          >
+        </video>
+      </div>
+
+      <div class="home-hero__overlay" aria-hidden="true"></div>
+
+      <!-- Transparent campaign artwork over the hero, under the content.
+           The image itself is set per theme via the --hero-tape token. -->
+      <div class="home-hero__tape" aria-hidden="true"></div>
+
+      <div class="home-hero__inner">
+        <h1 class="sb-sr-only">
+          Summer Ball 2027 at Reading Students' Union
+        </h1>
+
+        <!-- TODO: Summer Ball 2027 logo asset -->
+        <img
+          class="home-hero__logo"
+          src=""
+          alt="Summer Ball 2027 at Reading SU"
+          fetchpriority="high"
+          decoding="async"
+        >
+
+        <!-- TODO: hero decorative graphics -->
+        <img
+          class="home-hero__graphics"
+          src=""
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          decoding="async"
+        >
+
+        <p class="home-hero__date">Date to be announced</p>
+
+        <a class="home-hero__cta sb-btn sb-btn--tickets" href="#tickets">
+          Get Tickets
+        </a>
+
+        <p class="home-hero__note">Early bird tickets live now</p>
+      </div>
+
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+
+    <section class="home-about" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">The highlight of the year</h2>
+      <p>
+        Multiple stages, headline acts, fairground rides, ten bars and festival
+        food traders, running through the night across the Union and the Meadow.
+      </p>
+      <p class="home-about__lineup">Lineup announced closer to the event.</p>
+    </section>
+
+    <!-- ===================== TICKETS ===================== -->
+
+    <section class="home-tickets" id="tickets" aria-labelledby="tickets-heading">
+      <h2 id="tickets-heading">Ticket prices</h2>
+
+      <!-- TODO: confirm 2027 prices. Values below are 2026, structure only. -->
+      <div class="home-tickets__scroll">
+        <table class="tier-table">
+          <caption class="sb-sr-only">
+            Summer Ball ticket prices by audience and release stage
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Release</th>
+              <th scope="col">Student</th>
+              <th scope="col">Associate</th>
+              <th scope="col">Alumni</th>
+              <th scope="col">Guest</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-current="true">
+              <th scope="row">Early bird <span class="tier-table__flag">On sale</span></th>
+              <td data-label="Student">&pound;40</td>
+              <td data-label="Associate">&pound;55</td>
+              <td data-label="Alumni">&pound;55</td>
+              <td data-label="Guest">&pound;55</td>
+            </tr>
+            <tr>
+              <th scope="row">First release</th>
+              <td data-label="Student">&pound;45</td>
+              <td data-label="Associate">&pound;55</td>
+              <td data-label="Alumni">&pound;55</td>
+              <td data-label="Guest">&pound;60</td>
+            </tr>
+            <tr>
+              <th scope="row">Second release</th>
+              <td data-label="Student">&pound;55</td>
+              <td data-label="Associate">&pound;65</td>
+              <td data-label="Alumni">&pound;65</td>
+              <td data-label="Guest">&pound;65</td>
+            </tr>
+            <tr>
+              <th scope="row">Final release</th>
+              <td data-label="Student">&pound;60</td>
+              <td data-label="Associate">&pound;70</td>
+              <td data-label="Alumni">&pound;70</td>
+              <td data-label="Guest">&pound;70</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="home-tickets__group">
+        Student group ticket, four tickets for &pound;170.
+      </p>
+
+      <!-- TODO: real ticket URL -->
+      <a class="sb-btn sb-btn--tickets sb-btn--lg" href="">Get Tickets</a>
+
+      <p class="home-tickets__smallprint">
+        Prices rise at each release. Tickets are non-transferable and non-refundable.
+      </p>
+    </section>
+
+    <!-- ===================== NEED TO KNOW ===================== -->
+
+    <section class="home-info" id="info" aria-labelledby="info-heading">
+      <h2 id="info-heading">Need to know</h2>
+      <dl class="home-info__grid">
+        <div class="home-info__item">
+          <dt>Who can buy</dt>
+          <dd>Students, associate members and alumni, each with one guest ticket.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Entry</dt>
+          <dd>18+ with valid ID and your wristband. No re-entry.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Payment</dt>
+          <dd>The event is cashless. Bring a contactless card.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Dress code</dt>
+          <dd>It is a ball, so dress up. Comfortable shoes recommended.</dd>
+        </div>
+      </dl>
+      <p class="home-info__more">Full FAQs and wristband details to follow.</p>
+    </section>
+
+
+  </main>
+
+  <!-- ================================================================
+       THEME TOGGLE
+       Self contained: markup, styling and script together, so deleting
+       this block removes it entirely and leaves nothing behind.
+       ================================================================ -->
+
+  <style>
+    .sb-theme-toggle {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 3000;
+      display: flex;
+      gap: 2px;
+      padding: 2px;
+      background: #000;
+      border: 2px solid #fff;
+      font: 700 0.72rem/1 system-ui, sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .sb-theme-toggle button {
+      padding: 0.6rem 0.9rem;
+      background: transparent;
+      color: #fff;
+      border: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+    .sb-theme-toggle button[aria-pressed="true"] { background: #fff; color: #000; }
+  </style>
+
+  <div class="sb-theme-toggle" role="group" aria-label="Theme preview">
+    <button type="button" data-set-theme="bf" aria-pressed="false">Black Friday</button>
+    <button type="button" data-set-theme="bw" aria-pressed="false">Black &amp; White</button>
+    <button type="button" data-set-theme="cm" aria-pressed="false">Cyber Monday</button>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var buttons = document.querySelectorAll('.sb-theme-toggle [data-set-theme]');
+
+      function apply(theme) {
+        root.setAttribute('data-theme', theme);
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.setTheme === theme));
+        });
+        try { localStorage.setItem('sb-theme', theme); } catch (e) {}
+      }
+
+      var saved = null;
+      try { saved = localStorage.getItem('sb-theme'); } catch (e) {}
+
+      // Fall back to whatever the server rendered, else Black Friday.
+      var current = root.getAttribute('data-theme');
+      apply(saved || (current === 'cm' ? 'cm' : 'bf'));
+
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () { apply(b.dataset.setTheme); });
+      });
+    })();
+  </script>
+
+  <!-- ================ END DEV ONLY ================ -->
+
+</body>
+</html>

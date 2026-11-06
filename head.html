@@ -1,0 +1,59 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Summer Ball 2027 — shared head
+     Template path: SummerBall/.head
+
+     NOTE: never write an EE tag inside a comment. EE parses comments, so an
+     embed tag written here would make this template call itself.
+
+     Everything identical on every page of the microsite lives here: charset,
+     viewport, analytics, icons, fonts and the stylesheet. Change it once and
+     every page picks it up.
+
+     Page templates embed this as the FIRST thing inside their own head, then
+     add only what is page specific below it:
+       title, meta description, and any per page preload.
+
+     Order is load bearing: the two meta tags above stay at the very top of
+     this file. A browser only scans the first 1024 bytes of the document for
+     the charset, and this comment alone is most of that budget. Do not move
+     anything above them. -->
+
+<!-- ===================== ANALYTICS ===================== -->
+<!-- Google tag (gtag.js), Summer Ball GA4 property.
+     One copy for the whole microsite. Never repeat this on a page template:
+     a second copy double counts every pageview. Any page that does not embed
+     this partial is not tracked at all. -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NEQ6QSSM9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7NEQ6QSSM9');
+</script>
+
+<!-- ===================== ICONS ===================== -->
+<!-- TODO: Summer Ball 2027 favicon and touch icon assets.
+     Left commented out on purpose. An icon link with an empty href makes the
+     browser request the page itself as the icon, so uncomment each line only
+     once it has a real URL. -->
+
+<!-- <link rel="icon" href="" sizes="any"> -->
+<!-- <link rel="icon" type="image/svg+xml" href=""> -->
+<!-- <link rel="apple-touch-icon" href=""> -->
+
+<!-- ===================== FONTS ===================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- TODO: font pairing once the theme is decided -->
+<link href="" rel="stylesheet">
+
+<!-- ===================== STYLES ===================== -->
+<!-- Both themes and all layout. Bump ?v= on every change, no cache purge on SUMS. -->
+
+<link rel="stylesheet" href="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/home.css?v=847302">

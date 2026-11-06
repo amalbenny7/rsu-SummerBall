@@ -1,0 +1,368 @@
+<!-- Summer Ball 2027 — shared nav
+     Template path: SummerBall/.nav
+     NOTE: never write an EE tag inside a comment. EE parses comments, so an
+     embed tag written here would make this template call itself.
+
+     SELF CONTAINED. Markup and styling live together so this partial can be
+     embedded on any page of the microsite without that page needing to carry
+     nav CSS. Do not move these rules into a page stylesheet.
+
+     Colours come from theme tokens with fallbacks, so the nav still renders
+     if a page loads before the theme file.
+
+     Structure taken from the Freshers 2026 nav. No JavaScript: the mobile menu
+     is driven by the hidden checkbox below via CSS sibling selectors.
+
+     IMPORTANT — element order is load bearing:
+       #sb-nav-state  must stay the FIRST sibling, before the nav, scrim and menu,
+       because the CSS targets them with `.sb-nav-state:checked ~ ...`.
+       Moving or nesting it breaks the menu. -->
+
+<style>
+/* ===================== POSITIONING CONTEXT ===================== */
+/* The chrome overlays the hero. The nav stays transparent so hero
+   media reads through behind it. Do not give the nav a background. */
+
+.sb-page { position: relative; }
+
+.sb-page-chrome {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+}
+
+/* ===================== SKIP LINK ===================== */
+
+.sb-skip-link {
+  position: absolute;
+  top: -100%;
+  left: clamp(1rem, 4vw, 4rem);
+  z-index: 2100;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent, #ffffff);
+  color: var(--accent-text, #000000);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sb-skip-link:focus { top: 0.75rem; }
+
+/* ===================== NAV ===================== */
+
+.sb-nav-state {
+  position: fixed;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sb-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 2.5vw, 2rem);
+
+  padding: clamp(1rem, 2vw, 1.75rem) clamp(1rem, 4vw, 4rem);
+
+  background: transparent;
+  border-bottom: 1px solid var(--nav-line, rgb(255 255 255 / 12%));
+}
+
+.sb-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: clamp(9rem, 15vw, 14rem);
+  text-decoration: none;
+}
+
+.sb-nav__brand-img { display: block; width: 100%; height: auto; }
+
+.sb-nav__desktop-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 2.5vw, 2.75rem);
+}
+
+.sb-nav__desktop-links > a {
+  color: var(--text, #ffffff);
+  font-family: var(--font-display, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: var(--step-0, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity var(--transition, 180ms ease);
+}
+
+.sb-nav__desktop-links > a:hover { opacity: 0.65; }
+
+/* Scoped to beat `.sb-nav__desktop-links > a` on specificity, otherwise the
+   link colour wins and the label disappears into the button. */
+.sb-nav__desktop-links > .sb-nav__cta {
+  padding: 0.7rem 1.5rem;
+  background: var(--accent, #ffffff);
+  color: var(--accent-text, #000000);
+  border: 2px solid var(--accent, #ffffff);
+  border-radius: var(--radius, 0);
+  transition:
+    background var(--transition, 180ms ease),
+    color var(--transition, 180ms ease);
+}
+
+.sb-nav__desktop-links > .sb-nav__cta:hover {
+  opacity: 1;
+  background: transparent;
+  color: var(--text, #ffffff);
+}
+
+/* Hamburger */
+.sb-nav__toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.32rem;
+
+  width: 3rem; height: 3rem;
+  background: transparent;
+  border: 2px solid var(--line-strong, #ffffff);
+  border-radius: var(--radius, 0);
+  cursor: pointer;
+}
+
+.sb-nav__toggle span {
+  display: block;
+  width: 1.3rem; height: 2px;
+  background: var(--text, #ffffff);
+  transition:
+    transform var(--transition, 180ms ease),
+    opacity var(--transition, 180ms ease);
+}
+
+.sb-nav-state:checked ~ .sb-nav .sb-nav__toggle span:nth-child(1) {
+  transform: translateY(0.52rem) rotate(45deg);
+}
+.sb-nav-state:checked ~ .sb-nav .sb-nav__toggle span:nth-child(2) { opacity: 0; }
+.sb-nav-state:checked ~ .sb-nav .sb-nav__toggle span:nth-child(3) {
+  transform: translateY(-0.52rem) rotate(-45deg);
+}
+
+/* ===================== MOBILE MENU ===================== */
+
+.sb-menu-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1998;
+  background: var(--scrim, rgb(0 0 0 / 70%));
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--transition, 180ms ease),
+    visibility var(--transition, 180ms ease);
+}
+
+.sb-nav-state:checked ~ .sb-menu-scrim { opacity: 1; visibility: visible; }
+
+.sb-mobile-menu {
+  position: fixed;
+  top: 0; right: 0;
+  z-index: 1999;
+
+  width: min(86vw, 420px);
+  height: 100dvh;
+  padding: clamp(1.15rem, 4vw, 1.5rem);
+  box-sizing: border-box;
+
+  background: var(--surface, #0b0b0b);
+  color: var(--text, #ffffff);
+  border-left: 4px solid var(--line-strong, #ffffff);
+
+  /* Only scrolls if its own content is taller than the screen, never chains
+     that scroll to the page behind it, and never paints a bar. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform var(--transition, 180ms ease),
+    visibility var(--transition, 180ms ease);
+}
+
+.sb-mobile-menu::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+.sb-nav-state:checked ~ .sb-mobile-menu {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.sb-mobile-menu__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sb-mobile-menu__brand { display: inline-flex; width: min(10rem, 50vw); }
+.sb-mobile-menu__brand img { display: block; width: 100%; height: auto; }
+
+.sb-mobile-menu__close {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.85rem; height: 2.85rem;
+  background: transparent;
+  border: 2px solid var(--line-strong, #ffffff);
+  border-radius: var(--radius, 0);
+  cursor: pointer;
+}
+
+.sb-mobile-menu__close span {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 1.3rem; height: 2px;
+  background: var(--text, #ffffff);
+}
+
+.sb-mobile-menu__close span:first-child { transform: translate(-50%, -50%) rotate(45deg); }
+.sb-mobile-menu__close span:last-child  { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.sb-mobile-menu__label {
+  margin: clamp(2rem, 7vw, 3rem) 0 0.75rem;
+  color: var(--muted, #9a9a9a);
+  font-size: var(--step--1, 0.85rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.sb-mobile-menu__links { display: grid; }
+
+.sb-mobile-menu__links a {
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+  color: var(--text, #ffffff);
+  border-bottom: 1px solid var(--line, #2a2a2a);
+
+  font-family: var(--font-display, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: var(--step-1, 1.4rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* Scoped for the same specificity reason as the desktop CTA. */
+.sb-mobile-menu__links > .sb-mobile-menu__cta {
+  justify-content: center;
+  margin-top: 1.5rem;
+  background: var(--accent, #ffffff);
+  color: var(--accent-text, #000000);
+  border-bottom: 0;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 860px) {
+  .sb-nav { padding: 1rem clamp(1rem, 4vw, 4rem); }
+  .sb-nav__desktop-links { display: none; }
+  .sb-nav__toggle { display: flex; }
+}
+
+/* Lock page scroll behind the open menu.
+   Locks html and body, because which element scrolls depends on the
+   surrounding page. Needs confirming once this is live in SUMS: if that
+   page scrolls inside a wrapper div rather than the document, this cannot
+   reach it from CSS alone. */
+@supports selector(html:has(*)) {
+  html:has(.sb-nav-state:checked),
+  html:has(.sb-nav-state:checked) body {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-mobile-menu,
+  .sb-menu-scrim,
+  .sb-nav__toggle span { transition-duration: 0.01ms !important; }
+}
+</style>
+
+<a class="sb-skip-link" href="#main">Skip to content</a>
+
+<input
+  class="sb-nav-state"
+  type="checkbox"
+  id="sb-nav-state"
+  aria-hidden="true"
+>
+
+<nav class="sb-nav" aria-label="Summer Ball navigation">
+  <a class="sb-nav__brand" href="/summer-ball">
+    <!-- TODO: Summer Ball 2027 logo asset -->
+    <img
+      class="sb-nav__brand-img"
+      src=""
+      alt="Summer Ball 2027 at Reading SU"
+    >
+  </a>
+
+  <div class="sb-nav__desktop-links">
+    <a href="#about">About</a>
+    <a href="#tickets">Tickets</a>
+    <a href="#info">Info</a>
+    <!-- TODO: real ticket URL -->
+    <a class="sb-nav__cta" href="#tickets">Get Tickets</a>
+  </div>
+
+  <label
+    class="sb-nav__toggle"
+    for="sb-nav-state"
+    aria-label="Open Summer Ball menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+</nav>
+
+<label
+  class="sb-menu-scrim"
+  for="sb-nav-state"
+  aria-label="Close Summer Ball menu"
+></label>
+
+<aside class="sb-mobile-menu" aria-label="Summer Ball mobile navigation">
+  <div class="sb-mobile-menu__top">
+    <a class="sb-mobile-menu__brand" href="/summer-ball">
+      <!-- TODO: Summer Ball 2027 logo asset -->
+      <img
+        src=""
+        alt="Summer Ball 2027 at Reading SU"
+      >
+    </a>
+
+    <label
+      class="sb-mobile-menu__close"
+      for="sb-nav-state"
+      aria-label="Close Summer Ball menu"
+    >
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+
+  <p class="sb-mobile-menu__label">Menu</p>
+
+  <div class="sb-mobile-menu__links">
+    <a href="/summer-ball">Home</a>
+    <a href="#about">About</a>
+    <a href="#tickets">Tickets</a>
+    <a href="#info">Info</a>
+    <!-- TODO: real ticket URL -->
+    <a class="sb-mobile-menu__cta" href="#tickets">Get Tickets</a>
+  </div>
+</aside>
