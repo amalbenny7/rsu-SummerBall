@@ -2,23 +2,114 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Summer Ball 2027 — shared head
-     Template path: SummerBall/.head
+     Template path: SummerBall-prodtest/.head
 
      NOTE: never write an EE tag inside a comment. EE parses comments, so an
      embed tag written here would make this template call itself.
 
-     Everything identical on every page of the microsite lives here: charset,
-     viewport, analytics, icons, fonts and the stylesheet. Change it once and
-     every page picks it up.
+     Everything identical on every page of the microsite lives here: SEO,
+     analytics, icons, fonts and the stylesheet. Change it once and every page
+     picks it up.
 
-     Page templates embed this as the FIRST thing inside their own head, then
-     add only what is page specific below it:
-       title, meta description, and any per page preload.
+     Page specific values come in as embed parameters, so the markup lives
+     here and each page only passes values:
+
+       page_title, page_description, canonical_path, share_image
 
      Order is load bearing: the two meta tags above stay at the very top of
      this file. A browser only scans the first 1024 bytes of the document for
      the charset, and this comment alone is most of that budget. Do not move
      anything above them. -->
+
+<!-- ===================== PAGE META ===================== -->
+
+<title>{embed:page_title}</title>
+<meta name="description" content="{embed:page_description}">
+<link rel="canonical" href="https://readingsu.co.uk{embed:canonical_path}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reading Students' Union">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="{embed:page_title}">
+<meta property="og:description" content="{embed:page_description}">
+<meta property="og:url" content="https://readingsu.co.uk{embed:canonical_path}">
+<meta property="og:image" content="{embed:share_image}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ReadingUniSU">
+<meta name="twitter:title" content="{embed:page_title}">
+<meta name="twitter:description" content="{embed:page_description}">
+<meta name="twitter:image" content="{embed:share_image}">
+
+<!-- ===================== STRUCTURED DATA ===================== -->
+<!-- Shared nodes only: who we are, where we are, the site itself.
+     Page specific nodes (WebPage, Event) go in the page's own head and
+     reference these by @id rather than repeating them. -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://readingsu.co.uk/#organization",
+      "name": "Reading Students' Union",
+      "alternateName": "Reading SU",
+      "url": "https://readingsu.co.uk/",
+      "description": "The official students' union for University of Reading students.",
+      "telephone": "+44 118 378 4100",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://readingsu.co.uk/#logo",
+        "url": "https://assets-cdn.sums.digital/RD/website-assets/Images/website-images/RSU-DEEPBLUE-LOGO-RGB.webp",
+        "contentUrl": "https://assets-cdn.sums.digital/RD/website-assets/Images/website-images/RSU-DEEPBLUE-LOGO-RGB.webp",
+        "caption": "Reading Students' Union"
+      },
+      "image": { "@id": "https://readingsu.co.uk/#logo" },
+      "address": { "@id": "https://readingsu.co.uk/#postal-address" },
+      "location": { "@id": "https://readingsu.co.uk/#location" },
+      "sameAs": [
+        "https://www.instagram.com/readingunisu/",
+        "https://www.tiktok.com/@readingunisu",
+        "https://www.facebook.com/readingunisu/",
+        "https://x.com/ReadingUniSU",
+        "https://www.linkedin.com/company/reading-students-union/"
+      ]
+    },
+    {
+      "@type": "Place",
+      "@id": "https://readingsu.co.uk/#location",
+      "name": "Reading Students' Union",
+      "url": "https://readingsu.co.uk/about/contact-us",
+      "telephone": "+44 118 378 4100",
+      "address": { "@id": "https://readingsu.co.uk/#postal-address" },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.4408203,
+        "longitude": -0.9429387
+      },
+      "hasMap": "https://share.google/253McTFc1ic66qgAQ"
+    },
+    {
+      "@type": "PostalAddress",
+      "@id": "https://readingsu.co.uk/#postal-address",
+      "streetAddress": "University of Reading, Whiteknights Campus, Pepper Lane",
+      "addressLocality": "Reading",
+      "postalCode": "RG6 6EH",
+      "addressCountry": "GB"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://readingsu.co.uk/#website",
+      "url": "https://readingsu.co.uk/",
+      "name": "Reading Students' Union",
+      "alternateName": "Reading SU",
+      "publisher": { "@id": "https://readingsu.co.uk/#organization" },
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+</script>
 
 <!-- ===================== ANALYTICS ===================== -->
 <!-- Google tag (gtag.js), Summer Ball GA4 property.
@@ -36,12 +127,16 @@
 </script>
 
 <!-- ===================== ICONS ===================== -->
-<!-- TODO: Summer Ball 2027 favicon and touch icon assets.
-     Left commented out on purpose. An icon link with an empty href makes the
-     browser request the page itself as the icon, so uncomment each line only
-     once it has a real URL. -->
+<!-- TEMPORARY: RSU logo standing in until Summer Ball 2027 icon assets exist.
+     WebP is fine for favicons in current Chrome, Edge, Firefox and Safari,
+     but not for apple-touch-icon, which needs a PNG. -->
 
-<!-- <link rel="icon" href="" sizes="any"> -->
+<link rel="icon" type="image/webp" href="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/assets-public/favicon.svg">
+
+<!-- TODO: proper Summer Ball icon set. An icon link with an empty href makes
+     the browser request the page itself as the icon, so uncomment each line
+     only once it has a real URL. -->
+
 <!-- <link rel="icon" type="image/svg+xml" href=""> -->
 <!-- <link rel="apple-touch-icon" href=""> -->
 
@@ -51,9 +146,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <!-- TODO: font pairing once the theme is decided -->
-<link href="" rel="stylesheet">
 
 <!-- ===================== STYLES ===================== -->
 <!-- Both themes and all layout. Bump ?v= on every change, no cache purge on SUMS. -->
 
-<link rel="stylesheet" href="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/home.css?v=847302">
+<link rel="stylesheet" href="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/css/style.css">

@@ -1,5 +1,5 @@
 /* ============================================================
-   Summer Ball 2027 — home page
+   Summer Ball 2027 â€” home page
 
    One file. Black Friday tokens, Cyber Monday tokens, then all
    layout and components.
@@ -30,7 +30,7 @@
   --line-strong:    #ffffff;
   --nav-line:       rgb(255 255 255 / 12%);
 
-  /* Accent — RSU yellow. Black Friday reads as black, white and yellow. */
+  /* Accent â€” RSU yellow. Black Friday reads as black, white and yellow. */
   --accent:         #ffb411;
   --accent-text:    #000000;
   --accent-hover:   #ffc93f;
@@ -64,7 +64,7 @@
 }
 
 /* ------------------------------------------------------------
-   BLACK AND WHITE — stripped Black Friday.
+   BLACK AND WHITE â€” stripped Black Friday.
    Inherits everything from the block above and only drops the
    yellow and the overlay artwork.
    ------------------------------------------------------------ */
@@ -98,12 +98,12 @@
   --line-strong:    #1eb9dc;
   --nav-line:       rgb(30 185 220 / 28%);
 
-  /* Accent — electric cyan */
+  /* Accent â€” electric cyan */
   --accent:         #1eb9dc;
   --accent-text:    #04121a;
   --accent-hover:   #4fd4f0;
 
-  /* Secondary pop — magenta */
+  /* Secondary pop â€” magenta */
   --highlight:      #ff1758;
   --highlight-text: #ffffff;
 
