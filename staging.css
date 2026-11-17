@@ -1,0 +1,697 @@
+/* ============================================================
+   Summer Ball 2027 â€” home page
+
+   One file. Black and white tokens, Cyber Monday tokens, then
+   all layout and components.
+
+   Black and white is scoped to :root as well, so it is what
+   loads by default, and what any unrecognised theme name falls
+   back to. Cyber Monday comes second, so it wins when
+   data-theme="cm".
+
+   There is no yellow in this file. The old Black Friday theme
+   and its overlay artwork are gone.
+
+   No literal colours below the token blocks. Every colour is a
+   token, which is what lets the theme flip repaint the page.
+
+   Nav is styled inside nav.html, not here.
+   ============================================================ */
+
+:root,
+[data-theme="bw"] {
+  /* Surfaces */
+  --bg:             #000000;
+  --surface:        #0b0b0b;
+  --surface-alt:    #141414;
+
+  /* Text */
+  --text:           #ffffff;
+  /* Lifted from #9a9a9a: small copy on OLED and retina panels needs
+     more brightness than that gave it. */
+  --muted:          #c9c9c9;
+
+  /* Lines */
+  --line:           #2a2a2a;
+  --line-strong:    #ffffff;
+  --nav-line:       rgb(255 255 255 / 12%);
+
+  /* Accent: white on black. No yellow. */
+  --accent:         #ffffff;
+  --accent-text:    #000000;
+  --accent-hover:   #d8d8d8;
+
+  /* Secondary pop, used for flags and eyebrows */
+  --highlight:      #ffffff;
+  --highlight-text: #000000;
+
+  /* Overlays */
+  --hero-overlay:
+    linear-gradient(to bottom,
+      rgb(0 0 0 / 72%) 0%,
+      rgb(0 0 0 / 48%) 45%,
+      rgb(0 0 0 / 88%) 100%);
+  --scrim:          rgb(0 0 0 / 70%);
+
+  /* Hero artwork. None in black and white: the video and the
+     overlay gradient carry the hero on their own. */
+  --hero-tape:        none;
+  --hero-tape-mobile: none;
+
+  /* Shape */
+  --radius:         0;
+  --ring:           2px solid #ffffff;
+
+  /* Type */
+  --font-display:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body:      system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Motion */
+  --transition:     180ms ease;
+}
+
+[data-theme="cm"] {
+  /* Surfaces */
+  --bg:             #05060f;
+  --surface:        #0b0f2a;
+  --surface-alt:    #121840;
+
+  /* Text */
+  --text:           #eaf2ff;
+  --muted:          #7d8bb5;
+
+  /* Lines */
+  --line:           #243066;
+  --line-strong:    #1eb9dc;
+  --nav-line:       rgb(30 185 220 / 28%);
+
+  /* Accent â€” electric cyan */
+  --accent:         #1eb9dc;
+  --accent-text:    #04121a;
+  --accent-hover:   #4fd4f0;
+
+  /* Secondary pop â€” magenta */
+  --highlight:      #ff1758;
+  --highlight-text: #ffffff;
+
+  /* Overlays */
+  --hero-overlay:
+    linear-gradient(to bottom,
+      rgb(5 6 15 / 72%) 0%,
+      rgb(5 6 15 / 42%) 45%,
+      rgb(5 6 15 / 90%) 100%);
+  --scrim:          rgb(5 6 15 / 78%);
+
+  /* Hero artwork. Replace the filename at the end only. */
+  --hero-tape:        none;
+  --hero-tape-mobile: none;
+
+  /* Shape */
+  --radius:         10px;
+  --ring:           2px solid #1eb9dc;
+
+  /* Type */
+  --font-display:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body:      system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Motion */
+  --transition:     180ms ease;
+}
+
+
+:root {
+  /* Structural scale. Not theme dependent. */
+  --step--1:   clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
+  --step-0:    clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+  --step-1:    clamp(1.3rem, 1.15rem + 0.7vw, 1.75rem);
+  --step-2:    clamp(1.9rem, 1.5rem + 1.8vw, 3rem);
+  --step-3:    clamp(2.8rem, 1.9rem + 4.4vw, 6.5rem);
+
+  --gutter:    clamp(1.25rem, 5vw, 5.5rem);
+  --section-y: clamp(3.5rem, 9vw, 8rem);
+  --maxw:      1120px;
+}
+
+/* ===================== RESET ===================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+
+  /* Nothing on this page should ever scroll sideways. */
+  overflow-x: hidden;
+}
+
+/* No scrollbars anywhere on this site. The page still scrolls, the bar is
+   just never painted. */
+html,
+body {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* legacy Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;                /* Chrome, Edge, Safari */
+}
+
+h1, h2, h3, p, dl, dd { margin: 0; }
+
+img, video { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+table { border-collapse: collapse; width: 100%; }
+
+:focus-visible { outline: var(--ring); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .home-hero__video { display: none; }
+}
+
+/* Dev guard: placeholder assets have empty src, hide the broken icon. */
+img[src=""], img:not([src]) { display: none; }
+
+/* ===================== UTILITIES ===================== */
+
+.sb-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===================== BUTTONS ===================== */
+
+.sb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 3.1rem;
+  padding: 0.85rem 2rem;
+
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.sb-btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.sb-btn--lg {
+  min-height: 3.75rem;
+  padding: 1rem 3rem;
+  font-size: var(--step-1);
+}
+
+/* ===================== HERO ===================== */
+
+.home-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  /* Top clears the nav, which overlays the hero. Both are viewport-height
+     based so the whole block still fits one screen on a 14in laptop. */
+  padding: clamp(5rem, 11vh, 6.5rem) var(--gutter) clamp(2rem, 6vh, 3.5rem);
+  text-align: center;
+  overflow: hidden;
+}
+
+.home-hero__media { position: absolute; inset: 0; }
+
+.home-hero__video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.home-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+}
+
+/* Transparent campaign artwork laid over the hero, under the content.
+   Swap the asset per theme if the Cyber Monday version differs. */
+.home-hero__tape {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background-image: var(--hero-tape);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.home-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: clamp(0.55rem, 1.5vh, 1rem);
+  width: 100%;
+  max-width: var(--maxw);
+}
+
+.home-hero__logo {
+  width: min(78%, 20rem);
+  height: auto;
+  max-height: clamp(4.5rem, 13vh, 7rem);
+  object-fit: contain;
+}
+
+.home-hero__graphics { width: min(100%, 48rem); height: auto; }
+
+.home-hero__date {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.home-hero__note {
+  color: var(--muted);
+  font-size: var(--step--1);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ===================== SECTIONS ===================== */
+
+.home-where,
+.home-about,
+.home-tickets,
+.home-info {
+  width: min(100% - (var(--gutter) * 2), var(--maxw));
+  margin-inline: auto;
+  padding-block: var(--section-y);
+}
+
+.home-where + .home-about,
+.home-about + .home-tickets,
+.home-tickets + .home-info { border-top: 1px solid var(--line); }
+
+.home-where h2,
+.home-about h2,
+.home-tickets h2,
+.home-info h2 {
+  margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.home-about p { max-width: 60ch; }
+
+.home-about__lineup {
+  margin-top: 1rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ===================== TICKET TIERS ===================== */
+
+.home-tickets__scroll { overflow-x: auto; }
+
+.tier-table {
+  border: 1px solid var(--line-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.tier-table th,
+.tier-table td {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.tier-table thead th {
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line-strong);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tier-table tbody th {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tier-table tbody tr:last-child th,
+.tier-table tbody tr:last-child td { border-bottom: 0; }
+
+.tier-table tbody tr[data-current="true"] {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.tier-table tbody tr[data-current="true"] th,
+.tier-table tbody tr[data-current="true"] td { border-bottom-color: var(--accent-text); }
+
+.tier-table__flag {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.18rem 0.55rem;
+  background: var(--accent-text);
+  color: var(--accent);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+}
+
+.home-tickets__group {
+  margin-top: 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.home-tickets .sb-btn { margin-top: 1.75rem; }
+
+.home-tickets__smallprint {
+  margin-top: 1.25rem;
+  max-width: 55ch;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* ===================== NEED TO KNOW ===================== */
+
+.home-info__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.home-info__item { padding: 1.5rem; background: var(--bg); }
+
+.home-info__item dt {
+  margin-bottom: 0.5rem;
+  color: var(--highlight);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.home-info__item dd { margin: 0; color: var(--muted); }
+
+.home-info__more {
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 860px) {
+  /* Portrait crop of the hero overlay, per theme */
+  .home-hero__tape { background-image: var(--hero-tape-mobile); }
+
+  /* Tier table collapses to stacked cards */
+  .home-tickets__scroll { overflow-x: visible; }
+  .tier-table { border: 0; }
+  .tier-table thead { display: none; }
+  .tier-table tbody,
+  .tier-table tr { display: block; }
+
+  .tier-table tbody tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--line-strong);
+  }
+
+  .tier-table tbody th {
+    display: block;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .tier-table tbody tr[data-current="true"] th {
+    background: var(--accent-text);
+    color: var(--accent);
+  }
+
+  .tier-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .tier-table td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: var(--step--1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tier-table tbody tr[data-current="true"] td::before {
+    color: var(--accent-text);
+    opacity: 0.7;
+  }
+}
+/* ===================== BLACK FRIDAY HERO ===================== */
+/* The offer block. Price is the largest thing on the page on purpose:
+   the whole campaign is one number and one location. */
+
+.home-hero__eyebrow {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.home-hero__offer {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.home-hero__price {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.home-hero__tier {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ===================== SECTION LEDES ===================== */
+
+.home-where__lede,
+.home-tickets__lede {
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+/* Release date sits under its column heading. Hidden on mobile with the
+   rest of the thead, where data-label carries the release name instead. */
+.tier-table__date {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* ===================== READABILITY ===================== */
+/* The reset zeroes margin on p, and nothing added it back, so stacked
+   paragraphs ran together as one block. Body copy also gets a looser
+   line height than the 1.55 default. */
+
+.home-about p,
+.home-where__lede,
+.home-tickets__lede,
+.home-tickets__smallprint {
+  line-height: 1.7;
+}
+
+.home-about p + p { margin-top: 1.15rem; }
+
+.home-about__lineup { margin-top: 1.9rem; }
+
+/* ===================== FAQS, STACKED ===================== */
+/* Top to bottom, the way an FAQ is read. Longer page, easier scan. */
+
+.home-info__grid--stack {
+  display: block;
+  gap: 0;
+  background: none;
+  border: 0;
+}
+
+.home-info__grid--stack .home-info__item {
+  padding: 1.6rem 0;
+  background: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.home-info__grid--stack .home-info__item:last-child { border-bottom: 0; }
+
+.home-info__grid--stack dt {
+  margin-bottom: 0.65rem;
+  color: var(--text);
+  font-size: var(--step-0);
+  letter-spacing: 0.08em;
+}
+
+/* Answers are primary reading content, so full white rather than muted. */
+.home-info__grid--stack dd {
+  max-width: 68ch;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ===================== CLOSING CALL TO ACTION ===================== */
+/* The page ends on the only action that exists: turn up in person. */
+
+.home-outro {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+
+  width: min(100% - (var(--gutter) * 2), var(--maxw));
+  margin-inline: auto;
+  padding-block: var(--section-y);
+
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.home-outro__eyebrow {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.home-outro h2 {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.home-outro__lede {
+  max-width: 48ch;
+  line-height: 1.7;
+}
+
+.home-outro__price {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.home-outro__note {
+  color: var(--muted);
+  font-size: var(--step--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===================== FOOTER ===================== */
+/* Visually ends the page: the only surface change on the whole site,
+   so the document reads as finished rather than cut off. */
+
+.sb-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--line-strong);
+}
+
+.sb-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  width: min(100% - (var(--gutter) * 2), var(--maxw));
+  margin-inline: auto;
+  padding-block: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.sb-footer__brand {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sb-footer__meta {
+  color: var(--muted);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

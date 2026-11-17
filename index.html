@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="{if '{current_time format="%Y%m%d"}' >= '20261128'}cm{if:else}bf{/if}">
+<html lang="en">
 
 <head>
 
   <!-- Shared head: charset, viewport, analytics, icons, fonts, stylesheet.
-       Template path is summerball/.head. Must stay first inside the head. -->
-  {embed="summerball/.head"}
+       Template path is summerball/.head. Must stay first inside the head.
+       Page specific values are passed in as embed parameters. -->
+  {embed="summerball/.head"
+    page_title="SummerBall"
+    page_description="Black Friday ticket drop for Summer Ball 2027. Super early bird tickets at £37.50, in person only, Thursday 26 November outside the SU building."
+    canonical_path="/Summerball"
+    share_image="https://assets-cdn.sums.digital/RD/website-assets/Images/website-images/RSU-DEEPBLUE-LOGO-RGB.webp"
+  }
 
   <!-- Page specific below this line only. -->
 
-  <title>Summer Ball 2027 | Reading Students' Union</title>
-  <meta name="description" content="Summer Ball 2027 is the official end of year celebration from Reading Students' Union.">
-
-  <!-- TODO: Summer Ball 2027 logo asset -->
-  <link rel="preload" as="image" href="">
+  <link rel="preload" as="image"
+        href="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/assets-public/SUMMERBALL_LOGO.svg">
 </head>
 
 <body>
 
-  <main class="sb-page home-page">
+  <main class="sb-page home-page" id="main">
 
     <!-- ===================== PAGE CHROME ===================== -->
     <!-- Sits above the hero. The nav is transparent so the hero media
@@ -29,8 +32,10 @@
     </div>
 
     <!-- ===================== HERO ===================== -->
+    <!-- One job: get people to the stall. The offer, the price, the
+         date and the in person constraint all sit above the fold. -->
 
-    <section class="home-hero" aria-label="Summer Ball homepage">
+    <section class="home-hero" aria-label="Summer Ball 2027 Black Friday ticket drop">
 
       <div class="home-hero__media" aria-hidden="true">
         <video
@@ -51,213 +56,269 @@
       <div class="home-hero__overlay" aria-hidden="true"></div>
 
       <!-- Transparent campaign artwork over the hero, under the content.
-           The image itself is set per theme via the --hero-tape token. -->
+           Set per theme via the hero tape token. None in black and white. -->
       <div class="home-hero__tape" aria-hidden="true"></div>
 
       <div class="home-hero__inner">
         <h1 class="sb-sr-only">
-          Summer Ball 2027 at Reading Students' Union
+          Summer Ball 2027 Black Friday ticket drop at Reading Students&rsquo; Union
         </h1>
 
-        <!-- TODO: Summer Ball 2027 logo asset -->
         <img
           class="home-hero__logo"
-          src=""
+          src="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/assets-public/SUMMERBALL_LOGO.svg"
           alt="Summer Ball 2027 at Reading SU"
           fetchpriority="high"
           decoding="async"
         >
 
-        <!-- TODO: hero decorative graphics -->
-        <img
-          class="home-hero__graphics"
-          src=""
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          decoding="async"
-        >
+        <p class="home-hero__eyebrow">Black Friday</p>
 
-        <p class="home-hero__date">Date to be announced</p>
+        <p class="home-hero__offer">
+          <span class="home-hero__price">&pound;37.50</span>
+          <span class="home-hero__tier">Super early bird tickets</span>
+        </p>
 
-        <a class="home-hero__cta sb-btn sb-btn--tickets" href="#tickets">
-          Get Tickets
+        <p class="home-hero__date">In person only &middot; Thursday 26 November</p>
+
+        <a class="home-hero__cta sb-btn sb-btn--tickets" href="#where">
+          Find Us On Campus
         </a>
 
-        <p class="home-hero__note">Early bird tickets live now</p>
+        <p class="home-hero__note">
+          11.30am&ndash;3pm outside the SU building &middot; one day only
+        </p>
       </div>
 
+    </section>
+
+    <!-- ===================== WHERE TO FIND US ===================== -->
+    <!-- The conversion step. Nothing is bought online, so this section
+         carries the whole campaign. Keep it directly under the hero. -->
+
+    <section class="home-where" id="where" aria-labelledby="where-heading">
+      <h2 id="where-heading">Come and find us</h2>
+
+      <p class="home-where__lede">
+        The Black Friday ticket drop for Summer Ball 2027 is back. On Thursday
+        26 November 2026, grab your ticket for the lowest price it&rsquo;ll ever
+        be at just &pound;37.50. Find us outside the SU building for one day
+        only from 11.30am&ndash;3pm and save up to &pound;27.50!
+      </p>
+
+      <dl class="home-info__grid">
+        <div class="home-info__item">
+          <dt>When</dt>
+          <dd>Thursday 26 November 2026, 11.30am&ndash;3pm. One day only.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Where</dt>
+          <dd>The stall outside the SU building.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Bring</dt>
+          <dd>Your student ID card and a payment card. We will not accept cash.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Who</dt>
+          <dd>Students only. Maximum two tickets per person.</dd>
+        </div>
+      </dl>
     </section>
 
     <!-- ===================== ABOUT ===================== -->
 
     <section class="home-about" id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">The highlight of the year</h2>
+      <h2 id="about-heading">Never been before?</h2>
       <p>
-        Multiple stages, headline acts, fairground rides, ten bars and festival
-        food traders, running through the night across the Union and the Meadow.
+        Summer Ball is the biggest night in the student calendar. It&rsquo;s the
+        festival on your doorstep, open exclusively to Reading students and your
+        guests.
       </p>
-      <p class="home-about__lineup">Lineup announced closer to the event.</p>
+      <p>
+        Expect multiple stages, huge headliners, free fairground rides,
+        performers, bars, food trucks and thousands of students celebrating the
+        end of the year together. Make memories with your friends from sunset to
+        sunrise and be there for the iconic survivor&rsquo;s photo at 6am!
+      </p>
+      <p>
+        The line-up will be announced soon but don&rsquo;t worry it will not
+        disappoint. Previous years have included Arrdee, Vikkstar, RAYE, Caity
+        Baser, Becky Hill, D.O.D, Sub Focus, Disciples, Scouting for Girls,
+        Katy B and many more.
+      </p>
+      <p class="home-about__lineup">
+        Last year sold out, so we recommend getting your ticket asap to avoid
+        disappointment.
+      </p>
     </section>
 
-    <!-- ===================== TICKETS ===================== -->
+    <!-- ===================== TICKET PRICES ===================== -->
 
-    <section class="home-tickets" id="tickets" aria-labelledby="tickets-heading">
-      <h2 id="tickets-heading">Ticket prices</h2>
+    <section class="home-tickets" id="prices" aria-labelledby="prices-heading">
+      <h2 id="prices-heading">Ticket prices</h2>
 
-      <!-- TODO: confirm 2027 prices. Values below are 2026, structure only. -->
+      <p class="home-tickets__lede">
+        Black Friday super early bird tickets are &pound;37.50, in person only,
+        and available to students. Every later release is listed below.
+      </p>
+
       <div class="home-tickets__scroll">
         <table class="tier-table">
           <caption class="sb-sr-only">
-            Summer Ball ticket prices by audience and release stage
+            Summer Ball 2027 ticket prices by audience and release stage
           </caption>
           <thead>
             <tr>
-              <th scope="col">Release</th>
-              <th scope="col">Student</th>
-              <th scope="col">Associate</th>
-              <th scope="col">Alumni</th>
-              <th scope="col">Guest</th>
+              <th scope="col">Ticket</th>
+              <th scope="col">Early Bird <span class="tier-table__date">7/12/25</span></th>
+              <th scope="col">First Release <span class="tier-table__date">11/01/26</span></th>
+              <th scope="col">Second Release <span class="tier-table__date">11/03/26</span></th>
+              <th scope="col">Final Release <span class="tier-table__date">3/05/26</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr data-current="true">
-              <th scope="row">Early bird <span class="tier-table__flag">On sale</span></th>
-              <td data-label="Student">&pound;40</td>
-              <td data-label="Associate">&pound;55</td>
-              <td data-label="Alumni">&pound;55</td>
-              <td data-label="Guest">&pound;55</td>
+            <tr>
+              <th scope="row">Student</th>
+              <td data-label="Early Bird">&pound;42.50</td>
+              <td data-label="First Release">&pound;47.50</td>
+              <td data-label="Second Release">&pound;57.50</td>
+              <td data-label="Final Release">&pound;62.50</td>
             </tr>
             <tr>
-              <th scope="row">First release</th>
-              <td data-label="Student">&pound;45</td>
-              <td data-label="Associate">&pound;55</td>
-              <td data-label="Alumni">&pound;55</td>
-              <td data-label="Guest">&pound;60</td>
+              <th scope="row">Group Ticket <span class="tier-table__flag">Students only</span></th>
+              <td data-label="Early Bird">&mdash;</td>
+              <td data-label="First Release">&pound;172.50</td>
+              <td data-label="Second Release">&mdash;</td>
+              <td data-label="Final Release">&mdash;</td>
             </tr>
             <tr>
-              <th scope="row">Second release</th>
-              <td data-label="Student">&pound;55</td>
-              <td data-label="Associate">&pound;65</td>
-              <td data-label="Alumni">&pound;65</td>
-              <td data-label="Guest">&pound;65</td>
+              <th scope="row">Associate Member</th>
+              <td data-label="Early Bird">&mdash;</td>
+              <td data-label="First Release">&pound;57.50</td>
+              <td data-label="Second Release">&pound;67.50</td>
+              <td data-label="Final Release">&pound;72.50</td>
             </tr>
             <tr>
-              <th scope="row">Final release</th>
-              <td data-label="Student">&pound;60</td>
-              <td data-label="Associate">&pound;70</td>
-              <td data-label="Alumni">&pound;70</td>
-              <td data-label="Guest">&pound;70</td>
+              <th scope="row">Alumni</th>
+              <td data-label="Early Bird">&mdash;</td>
+              <td data-label="First Release">&pound;57.50</td>
+              <td data-label="Second Release">&pound;67.50</td>
+              <td data-label="Final Release">&pound;72.50</td>
+            </tr>
+            <tr>
+              <th scope="row">Guest</th>
+              <td data-label="Early Bird">&pound;57.50</td>
+              <td data-label="First Release">&pound;62.50</td>
+              <td data-label="Second Release">&pound;72.50</td>
+              <td data-label="Final Release">&pound;77.50</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <p class="home-tickets__group">
-        Student group ticket, four tickets for &pound;170.
-      </p>
-
-      <!-- TODO: real ticket URL -->
-      <a class="sb-btn sb-btn--tickets sb-btn--lg" href="">Get Tickets</a>
-
       <p class="home-tickets__smallprint">
-        Prices rise at each release. Tickets are non-transferable and non-refundable.
+        Super early bird tickets are only available to students. Tickets for this
+        event are non-refundable, so please make sure you are able to attend
+        before you buy your ticket.
       </p>
     </section>
 
-    <!-- ===================== NEED TO KNOW ===================== -->
+    <!-- ===================== FAQS ===================== -->
 
-    <section class="home-info" id="info" aria-labelledby="info-heading">
-      <h2 id="info-heading">Need to know</h2>
-      <dl class="home-info__grid">
+    <section class="home-info" id="faqs" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">Black Friday FAQs</h2>
+
+      <dl class="home-info__grid home-info__grid--stack">
         <div class="home-info__item">
-          <dt>Who can buy</dt>
-          <dd>Students, associate members and alumni, each with one guest ticket.</dd>
+          <dt>When is Summer Ball 2027?</dt>
+          <dd>Saturday 29th May.</dd>
         </div>
         <div class="home-info__item">
-          <dt>Entry</dt>
-          <dd>18+ with valid ID and your wristband. No re-entry.</dd>
+          <dt>Can I only buy a Black Friday ticket in person?</dt>
+          <dd>
+            Yes, this is a Black Friday in-person sale. Come along to the stall
+            outside the SU building on Thursday between 11.30am&ndash;3pm to buy
+            your ticket.
+          </dd>
         </div>
         <div class="home-info__item">
-          <dt>Payment</dt>
-          <dd>The event is cashless. Bring a contactless card.</dd>
+          <dt>Do I need to bring anything?</dt>
+          <dd>
+            Please bring your student ID card and a payment card. We will not
+            accept cash.
+          </dd>
         </div>
         <div class="home-info__item">
-          <dt>Dress code</dt>
-          <dd>It is a ball, so dress up. Comfortable shoes recommended.</dd>
+          <dt>How will I get my Black Friday ticket?</dt>
+          <dd>
+            The ticket will appear in your SU app in the &ldquo;Tickets&rdquo;
+            section. Please note, the ticket might not come through immediately
+            after payment.
+          </dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Can I buy a Black Friday ticket for my friend?</dt>
+          <dd>
+            You can buy a maximum of 2 tickets. Your friend must also be a
+            student and you will need their student ID number. The ticket will
+            be sent to their SU app.
+          </dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Can I buy a Black Friday Guest ticket?</dt>
+          <dd>
+            No, Black Friday tickets are for students only. You must have your
+            student ID.
+          </dd>
+        </div>
+        <div class="home-info__item">
+          <dt>How much do I save?</dt>
+          <dd>This Black Friday sale saves you up to &pound;27.50.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Can I get a refund?</dt>
+          <dd>
+            No. Tickets for this event are non-refundable so please make sure you
+            are able to attend before you buy your ticket.
+          </dd>
         </div>
       </dl>
-      <p class="home-info__more">Full FAQs and wristband details to follow.</p>
+
     </section>
 
+    <!-- ===================== CLOSING CALL TO ACTION ===================== -->
+    <!-- Last thing on the page, and the only thing it asks for: turn up.
+         Repeats the practical details so nobody has to scroll back. -->
+
+    <section class="home-outro" aria-labelledby="outro-heading">
+      <p class="home-outro__eyebrow">One day only</p>
+
+      <h2 id="outro-heading">See you outside the SU</h2>
+
+      <p class="home-outro__lede">
+        Thursday 26 November, 11.30am&ndash;3pm. Bring your student ID and a
+        payment card, and grab Summer Ball 2027 for the lowest price it will
+        ever be.
+      </p>
+
+      <p class="home-outro__price">&pound;37.50</p>
+
+      <p class="home-outro__note">
+        Students only &middot; Maximum two tickets &middot; We cannot accept cash
+      </p>
+    </section>
 
   </main>
 
-  <!-- ================================================================
-       THEME TOGGLE
-       Self contained: markup, styling and script together, so deleting
-       this block removes it entirely and leaves nothing behind.
-       ================================================================ -->
+  <!-- ===================== FOOTER ===================== -->
 
-  <style>
-    .sb-theme-toggle {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 3000;
-      display: flex;
-      gap: 2px;
-      padding: 2px;
-      background: #000;
-      border: 2px solid #fff;
-      font: 700 0.72rem/1 system-ui, sans-serif;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .sb-theme-toggle button {
-      padding: 0.6rem 0.9rem;
-      background: transparent;
-      color: #fff;
-      border: 0;
-      font: inherit;
-      cursor: pointer;
-    }
-    .sb-theme-toggle button[aria-pressed="true"] { background: #fff; color: #000; }
-  </style>
-
-  <div class="sb-theme-toggle" role="group" aria-label="Theme preview">
-    <button type="button" data-set-theme="bf" aria-pressed="false">Black Friday</button>
-    <button type="button" data-set-theme="bw" aria-pressed="false">Black &amp; White</button>
-    <button type="button" data-set-theme="cm" aria-pressed="false">Cyber Monday</button>
-  </div>
-
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var buttons = document.querySelectorAll('.sb-theme-toggle [data-set-theme]');
-
-      function apply(theme) {
-        root.setAttribute('data-theme', theme);
-        buttons.forEach(function (b) {
-          b.setAttribute('aria-pressed', String(b.dataset.setTheme === theme));
-        });
-        try { localStorage.setItem('sb-theme', theme); } catch (e) {}
-      }
-
-      var saved = null;
-      try { saved = localStorage.getItem('sb-theme'); } catch (e) {}
-
-      // Fall back to whatever the server rendered, else Black Friday.
-      var current = root.getAttribute('data-theme');
-      apply(saved || (current === 'cm' ? 'cm' : 'bf'));
-
-      buttons.forEach(function (b) {
-        b.addEventListener('click', function () { apply(b.dataset.setTheme); });
-      });
-    })();
-  </script>
-
-  <!-- ================ END DEV ONLY ================ -->
+  <footer class="sb-footer">
+    <div class="sb-footer__inner">
+      <p class="sb-footer__brand">Reading Students&rsquo; Union</p>
+      <p class="sb-footer__meta">Summer Ball 2027 &middot; Saturday 29th May</p>
+    </div>
+  </footer>
 
 </body>
 </html>

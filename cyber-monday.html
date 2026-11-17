@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!-- Summer Ball 2027 — Cyber Monday page
+
+     Swap this in for the Black Friday home page once the stall closes at
+     3pm on Thursday 26 November.
+
+     The theme is the ONLY design difference: data-theme="cm" below pulls the
+     Cyber Monday tokens that already exist in the stylesheet (cyan accent,
+     navy surfaces, 10px radius, cm hero overlay). No CSS changes, so nothing
+     is recached.
+
+     NOTE: never write an EE tag inside a comment. EE parses comments, so an
+     embed tag written here would make this template call itself. -->
+<html lang="en" data-theme="cm">
+
+<head>
+
+  <!-- Shared head: charset, viewport, analytics, icons, fonts, stylesheet.
+       Template path is summerball/.head. Must stay first inside the head.
+       Page specific values are passed in as embed parameters. -->
+  {embed="summerball/.head"
+    page_title="SummerBall"
+    page_description="Cyber Monday ticket drop for Summer Ball 2027. Super early bird tickets online at £40, from 10am Friday 27 November to midnight Monday 30 November."
+    canonical_path="/Summerball"
+    share_image="https://assets-cdn.sums.digital/RD/website-assets/Images/website-images/RSU-DEEPBLUE-LOGO-RGB.webp"
+  }
+
+  <!-- Page specific below this line only. -->
+
+  <link rel="preload" as="image"
+        href="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/assets-public/SUMMERBALL_LOGO.svg">
+</head>
+
+<body>
+
+  <main class="sb-page home-page" id="main">
+
+    <!-- ===================== PAGE CHROME ===================== -->
+    <!-- Sits above the hero. The nav is transparent so the hero media
+         reads through behind it. Do not give the nav a background. -->
+
+    <div class="sb-page-chrome">
+      {embed="summerball/.nav"}
+    </div>
+
+    <!-- ===================== HERO ===================== -->
+    <!-- Unlike Black Friday, this one sells online. The job of the hero is
+         the click, not the walk, so the CTA is the purchase link. -->
+
+    <section class="home-hero" aria-label="Summer Ball 2027 Cyber Monday ticket drop">
+
+      <div class="home-hero__media" aria-hidden="true">
+        <video
+          class="home-hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="https://pub-55af2d4686204e23a700218d4f222c67.r2.dev/SummerBall/hero.mp4"
+            type="video/mp4"
+          >
+        </video>
+      </div>
+
+      <div class="home-hero__overlay" aria-hidden="true"></div>
+
+      <!-- Transparent campaign artwork over the hero, under the content.
+           Set per theme via the hero tape token. -->
+      <div class="home-hero__tape" aria-hidden="true"></div>
+
+      <div class="home-hero__inner">
+        <h1 class="sb-sr-only">
+          Summer Ball 2027 Cyber Monday ticket drop at Reading Students&rsquo; Union
+        </h1>
+
+        <img
+          class="home-hero__logo"
+          src="https://assets-cdn.sums.digital/RD/digital_development/SummerBall/assets-public/SUMMERBALL_LOGO.svg"
+          alt="Summer Ball 2027 at Reading SU"
+          fetchpriority="high"
+          decoding="async"
+        >
+
+        <p class="home-hero__eyebrow">Cyber Monday</p>
+
+        <p class="home-hero__offer">
+          <span class="home-hero__price">&pound;40</span>
+          <span class="home-hero__tier">Super early bird tickets</span>
+        </p>
+
+        <p class="home-hero__date">Online &middot; Friday 27 &ndash; Monday 30 November</p>
+
+        <!-- TODO: replace with the online ticket URL. Points at the detail
+             section until then, so the button is never a dead link. -->
+        <a class="home-hero__cta sb-btn sb-btn--tickets" href="#how">
+          Get Your Tickets
+        </a>
+
+        <p class="home-hero__note">
+          10am Friday until midnight Monday &middot; students only
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ===================== HOW TO BUY ===================== -->
+    <!-- The conversion step. Black Friday sent people to a stall; this sends
+         them to a checkout, so the sale window is the thing to be clear about. -->
+
+    <section class="home-where" id="how" aria-labelledby="how-heading">
+      <h2 id="how-heading">Second chance, online</h2>
+
+      <p class="home-where__lede">
+        Missed out on Black Friday? Don&rsquo;t worry, there is a second chance
+        to get a discounted ticket for Summer Ball 2027. Get your Cyber Monday
+        ticket online for only &pound;40 from 10am on Friday 27th November
+        &ndash; midnight on Monday 30th November and save up to &pound;22.50!
+      </p>
+
+      <dl class="home-info__grid">
+        <div class="home-info__item">
+          <dt>Opens</dt>
+          <dd>10am, Friday 27th November 2026.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Closes</dt>
+          <dd>Midnight, Monday 30th November 2026.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Where</dt>
+          <dd>Online only. Nothing to collect in person.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Who</dt>
+          <dd>Students only. Cyber Monday tickets are not available to guests.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+
+    <section class="home-about" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">Never been before?</h2>
+      <p>
+        Summer Ball is the biggest night in the student calendar. It&rsquo;s the
+        festival on your doorstep, open exclusively to Reading students and your
+        guests.
+      </p>
+      <p>
+        Expect multiple stages, huge headliners, free fairground rides,
+        performers, bars, food trucks and thousands of students celebrating the
+        end of the year together. Make memories with your friends from sunset to
+        sunrise and be there for the iconic survivor&rsquo;s photo at 6am!
+      </p>
+      <p>
+        The line-up will be announced soon but don&rsquo;t worry it will not
+        disappoint. Previous years have included Arrdee, Vikkstar, RAYE, Caity
+        Baser, Becky Hill, D.O.D, Sub Focus, Disciples, Scouting for Girls,
+        Katy B and many more.
+      </p>
+      <p class="home-about__lineup">
+        Last year sold out, so we recommend getting your ticket asap to avoid
+        disappointment.
+      </p>
+    </section>
+
+    <!-- ===================== TICKET PRICES ===================== -->
+
+    <section class="home-tickets" id="prices" aria-labelledby="prices-heading">
+      <h2 id="prices-heading">Ticket prices</h2>
+
+      <p class="home-tickets__lede">
+        Cyber Monday super early bird tickets are &pound;40, online, and
+        available to students. Every later release is listed below.
+      </p>
+
+      <div class="home-tickets__scroll">
+        <table class="tier-table">
+          <caption class="sb-sr-only">
+            Summer Ball 2027 ticket prices by audience and release stage
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Ticket</th>
+              <th scope="col">Early Bird <span class="tier-table__date">7/12/25</span></th>
+              <th scope="col">First Release <span class="tier-table__date">11/01/26</span></th>
+              <th scope="col">Second Release <span class="tier-table__date">11/03/26</span></th>
+              <th scope="col">Final Release <span class="tier-table__date">3/05/26</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Student</th>
+              <td data-label="Early Bird">&pound;42.50</td>
+              <td data-label="First Release">&pound;47.50</td>
+              <td data-label="Second Release">&pound;57.50</td>
+              <td data-label="Final Release">&pound;62.50</td>
+            </tr>
+            <tr>
+              <th scope="row">Group Ticket <span class="tier-table__flag">Students only</span></th>
+              <td data-label="Early Bird">&mdash;</td>
+              <td data-label="First Release">&pound;172.50</td>
+              <td data-label="Second Release">&mdash;</td>
+              <td data-label="Final Release">&mdash;</td>
+            </tr>
+            <tr>
+              <th scope="row">Associate Member</th>
+              <td data-label="Early Bird">&mdash;</td>
+              <td data-label="First Release">&pound;57.50</td>
+              <td data-label="Second Release">&pound;67.50</td>
+              <td data-label="Final Release">&pound;72.50</td>
+            </tr>
+            <tr>
+              <th scope="row">Alumni</th>
+              <td data-label="Early Bird">&mdash;</td>
+              <td data-label="First Release">&pound;57.50</td>
+              <td data-label="Second Release">&pound;67.50</td>
+              <td data-label="Final Release">&pound;72.50</td>
+            </tr>
+            <tr>
+              <th scope="row">Guest</th>
+              <td data-label="Early Bird">&pound;57.50</td>
+              <td data-label="First Release">&pound;62.50</td>
+              <td data-label="Second Release">&pound;72.50</td>
+              <td data-label="Final Release">&pound;77.50</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="home-tickets__smallprint">
+        Super early bird tickets are only available to students. Tickets for this
+        event are non-refundable, so please make sure you are able to attend
+        before you buy your ticket.
+      </p>
+    </section>
+
+    <!-- ===================== FAQS ===================== -->
+
+    <section class="home-info" id="faqs" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">Cyber Monday FAQs</h2>
+
+      <dl class="home-info__grid home-info__grid--stack">
+        <div class="home-info__item">
+          <dt>When is Summer Ball 2027?</dt>
+          <dd>Saturday 29th May.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>When can I get a Cyber Monday ticket?</dt>
+          <dd>
+            Between 10am on Friday 27th November and midnight on Monday 30th
+            November.
+          </dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Can I buy a Cyber Monday Guest ticket?</dt>
+          <dd>No, Cyber Monday tickets are for students only.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>How much do I save?</dt>
+          <dd>This Cyber Monday sale saves you up to &pound;22.50.</dd>
+        </div>
+        <div class="home-info__item">
+          <dt>Can I get a refund?</dt>
+          <dd>
+            No. Tickets for this event are non-refundable so please make sure you
+            are able to attend before you buy your ticket.
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ===================== CLOSING CALL TO ACTION ===================== -->
+    <!-- Last thing on the page. Black Friday asked people to turn up; this
+         asks them to buy before the window shuts. -->
+
+    <section class="home-outro" aria-labelledby="outro-heading">
+      <p class="home-outro__eyebrow">Closes midnight Monday</p>
+
+      <h2 id="outro-heading">Get yours before it goes</h2>
+
+      <p class="home-outro__lede">
+        Open until midnight on Monday 30th November. After that the next release
+        is the cheapest ticket available, so grab Summer Ball 2027 at the super
+        early bird price while the window is open.
+      </p>
+
+      <p class="home-outro__price">&pound;40</p>
+
+      <!-- TODO: replace with the online ticket URL. -->
+      <a class="sb-btn sb-btn--lg" href="#how">Get Your Tickets</a>
+
+      <p class="home-outro__note">
+        Students only &middot; Save up to &pound;22.50 &middot; Non-refundable
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+
+  <footer class="sb-footer">
+    <div class="sb-footer__inner">
+      <p class="sb-footer__brand">Reading Students&rsquo; Union</p>
+      <p class="sb-footer__meta">Summer Ball 2027 &middot; Saturday 29th May</p>
+    </div>
+  </footer>
+
+</body>
+</html>
